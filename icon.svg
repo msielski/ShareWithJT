@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="ShareWithJT share icon">
+  <rect width="512" height="512" fill="#fff"/>
+  <path d="m184 234 126-70m-126 114 126 70" fill="none" stroke="#ff5600" stroke-width="36" stroke-linecap="round"/>
+  <circle cx="146" cy="256" r="58" fill="#ff5600"/>
+  <circle cx="358" cy="138" r="58" fill="#ff5600"/>
+  <circle cx="358" cy="374" r="58" fill="#ff5600"/>
+</svg>

@@ -1,0 +1,13 @@
+{
+  "name": "share-with-jt",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "CC-BY-NC-SA-4.0",
+  "description": "A static Android share-target PWA for uploading files and photos to JobTread.",
+  "scripts": {
+    "check": "node --check app.js && node --check jobtread.js && node --check storage.js && node --check sw.js",
+    "test": "node --test",
+    "serve": "npx serve ."
+  }
+}

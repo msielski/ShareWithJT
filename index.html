@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#e85d24" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' blob: data:; connect-src https:; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self'"
+    />
+    <meta
+      name="description"
+      content="Share files and photos from Android directly to a JobTread customer or job."
+    />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" href="./icon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>ShareWithJT</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="ShareWithJT home">
+        <img src="./icon.svg" width="44" height="44" alt="" />
+        <span>
+          <strong>ShareWithJT</strong>
+          <small>Files and photos to JobTread, in a few taps</small>
+        </span>
+      </a>
+      <button id="install-button" class="button button-secondary compact" type="button" hidden>
+        Install app
+      </button>
+    </header>
+
+    <main>
+      <section class="hero card">
+        <div>
+          <p class="eyebrow">Android share target</p>
+          <h1>Send files and photos where they belong.</h1>
+          <p>
+            Install this app, select items in Android’s Files or Photos app, tap
+            <strong>Share</strong>, and choose <strong>ShareWithJT</strong>. Then pick a customer,
+            optionally pick a job, and upload.
+          </p>
+        </div>
+        <ol class="steps" aria-label="How to share files and photos">
+          <li><span>1</span>Select files or photos</li>
+          <li><span>2</span>Share to this app</li>
+          <li><span>3</span>Choose destination</li>
+        </ol>
+      </section>
+
+      <section id="settings-card" class="card" aria-labelledby="settings-heading">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Connection</p>
+            <h2 id="settings-heading">JobTread access</h2>
+          </div>
+          <span id="connection-badge" class="badge" hidden>Connected</span>
+        </div>
+
+        <form id="token-form" class="token-form">
+          <label for="grant-key">JobTread Grant Key</label>
+          <div class="inline-control">
+            <input
+              id="grant-key"
+              name="grantKey"
+              type="password"
+              autocomplete="off"
+              autocapitalize="none"
+              spellcheck="false"
+              required
+              placeholder="Paste your Grant Key"
+            />
+            <button class="button" type="submit">Save &amp; connect</button>
+          </div>
+          <p class="field-help">
+            Create a Grant Key in
+            <a href="https://app.jobtread.com/profile/grants" target="_blank" rel="noreferrer">
+              JobTread’s Grant Management
+            </a>.
+            It stays only in this browser’s local storage. Treat it like a password.
+          </p>
+        </form>
+
+        <div id="connected-panel" class="connected-panel" hidden>
+          <div>
+            <strong id="organization-name"></strong>
+            <p>Grant Key saved on this device.</p>
+          </div>
+          <button id="forget-token" class="text-button danger" type="button">Forget key</button>
+        </div>
+        <p id="connection-status" class="status" role="status" aria-live="polite"></p>
+      </section>
+
+      <section class="card" aria-labelledby="files-heading">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Files &amp; photos</p>
+            <h2 id="files-heading">Ready to upload</h2>
+          </div>
+          <label class="button button-secondary compact" for="file-picker">Choose files</label>
+          <input
+            id="file-picker"
+            class="visually-hidden"
+            type="file"
+            accept="image/*,video/*,audio/*,application/pdf,text/plain,text/csv,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.zip"
+            multiple
+          />
+        </div>
+
+        <div id="empty-files" class="empty-state">
+          <div class="empty-icon" aria-hidden="true">+</div>
+          <strong>No files or photos selected yet</strong>
+          <p>Use the button above, or share items here from an Android Files or Photos app.</p>
+        </div>
+
+        <div id="file-summary" class="file-summary" hidden>
+          <p id="file-count"></p>
+          <button id="clear-files" class="text-button" type="button">Clear all</button>
+        </div>
+        <ul id="file-list" class="file-list" aria-label="Selected files and photos"></ul>
+      </section>
+
+      <section class="card" aria-labelledby="destination-heading">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Destination</p>
+            <h2 id="destination-heading">Choose where they go</h2>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="field">
+            <label for="customer-input">Customer <span aria-hidden="true">*</span></label>
+            <input
+              id="customer-input"
+              type="text"
+              list="customer-options"
+              autocomplete="off"
+              placeholder="Search customers"
+              disabled
+            />
+            <datalist id="customer-options"></datalist>
+            <p id="customer-help" class="field-help">Connect to JobTread to load customers.</p>
+          </div>
+
+          <div class="field">
+            <label for="job-input">Job <span class="optional">Optional</span></label>
+            <input
+              id="job-input"
+              type="text"
+              list="job-options"
+              autocomplete="off"
+              placeholder="Customer Files (no job)"
+              disabled
+            />
+            <datalist id="job-options"></datalist>
+            <p id="job-help" class="field-help">Leave blank to upload to the customer’s Files.</p>
+          </div>
+        </div>
+
+        <div class="upload-footer">
+          <div>
+            <p id="upload-destination" class="destination-summary">Choose a customer to continue.</p>
+            <p id="upload-status" class="status" role="status" aria-live="polite"></p>
+          </div>
+          <button id="upload-button" class="button button-large" type="button" disabled>
+            Upload files
+          </button>
+        </div>
+        <div id="upload-progress" class="progress" hidden aria-hidden="true">
+          <div id="upload-progress-bar"></div>
+        </div>
+      </section>
+
+      <section class="privacy-note" aria-label="Privacy note">
+        <strong>Private by design.</strong>
+        <span>
+          There is no app server. Your key goes directly from this device to JobTread over HTTPS,
+          and successfully uploaded files are removed from this app’s local queue.
+        </span>
+      </section>
+    </main>
+
+    <template id="file-template">
+      <li class="file-item">
+        <div class="file-preview">
+          <img class="file-thumbnail" alt="" hidden />
+          <span class="file-type-icon" aria-hidden="true">FILE</span>
+        </div>
+        <div class="file-details">
+          <strong class="file-name"></strong>
+          <span class="file-size"></span>
+        </div>
+        <button class="icon-button remove-file" type="button" aria-label="Remove file">×</button>
+      </li>
+    </template>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

@@ -1,8 +1,8 @@
 {
   "id": "./",
-  "name": "ShareWithJT",
-  "short_name": "ShareWithJT",
-  "description": "Share Android files and photos directly to a JobTread customer or job.",
+  "name": "Share With JT",
+  "short_name": "Share With JT",
+  "description": "Share files and photos directly to a JobTread customer or job, via Android share panel.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

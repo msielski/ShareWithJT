@@ -10,7 +10,7 @@
     />
     <meta
       name="description"
-      content="Share files and photos from Android directly to a JobTread customer or job."
+      content="Share files and photos directly to a JobTread customer or job, via Android share panel."
     />
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="icon" href="./icon.svg" type="image/svg+xml" />
@@ -22,8 +22,7 @@
       <a class="brand" href="./" aria-label="ShareWithJT home">
         <img src="./icon.svg" width="44" height="44" alt="" />
         <span>
-          <strong>ShareWithJT</strong>
-          <small>Files and photos to JobTread, in a few taps</small>
+          <strong>Share With JT</strong>
         </span>
       </a>
       <button id="install-button" class="button button-secondary compact" type="button" hidden>
@@ -37,8 +36,8 @@
           <p class="eyebrow">Android share target</p>
           <h1>Send files and photos where they belong.</h1>
           <p>
-            Install this app, select items in Android’s Files or Photos app, tap
-            <strong>Share</strong>, and choose <strong>ShareWithJT</strong>. Then pick a customer,
+            Install this app, select items in Android's Files or Photos app, tap
+            <strong>Share</strong>, and choose <strong>Share With JT</strong>. Then pick a customer,
             optionally pick a job, and upload.
           </p>
         </div>
@@ -76,9 +75,9 @@
           <p class="field-help">
             Create a Grant Key in
             <a href="https://app.jobtread.com/profile/grants" target="_blank" rel="noreferrer">
-              JobTread’s Grant Management
+              JobTread's Grant Management
             </a>.
-            It stays only in this browser’s local storage. Treat it like a password.
+            It stays only in this browser's local storage. Treat it like a password.
           </p>
         </form>
 
@@ -155,7 +154,7 @@
               disabled
             />
             <datalist id="job-options"></datalist>
-            <p id="job-help" class="field-help">Leave blank to upload to the customer’s Files.</p>
+            <p id="job-help" class="field-help">Leave blank to upload to the customer's Files.</p>
           </div>
         </div>
 
@@ -177,7 +176,9 @@
         <strong>Private by design.</strong>
         <span>
           There is no app server. Your key goes directly from this device to JobTread over HTTPS,
-          and successfully uploaded files are removed from this app’s local queue.
+          and successfully uploaded files are removed from this app's local queue.
+          <br />
+          <a href="https://github.com/msielski/ShareWithJT">This open source project is on github.</a>
         </span>
       </section>
     </main>
